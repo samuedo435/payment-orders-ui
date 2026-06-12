@@ -12,6 +12,8 @@ function DashboardPage() {
     } = useAuth();
 
     return (
+    <>
+        <Navbar />
 
         <div className="container mt-4">
 
@@ -34,7 +36,8 @@ function DashboardPage() {
             </p>
 
         </div>
-    );
+    </>
+);
 }
 
 export default DashboardPage;
