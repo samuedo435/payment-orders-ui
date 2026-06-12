@@ -9,6 +9,7 @@ import DashboardPage from "../pages/DashboardPage";
 import OrdersPage from "../pages/OrdersPage";
 import OrderDetailPage from "../pages/OrderDetailPage";
 import ProtectedRoute from "../components/ProtectedRoute";
+import CreateOrderPage from "../pages/CreateOrderPage";
 
 function AppRoutes() {
 
@@ -51,6 +52,15 @@ function AppRoutes() {
                     element={
                         <ProtectedRoute>
                             <OrderDetailPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/orders/create"
+                    element={
+                        <ProtectedRoute>
+                            <CreateOrderPage />
                         </ProtectedRoute>
                     }
                 />
