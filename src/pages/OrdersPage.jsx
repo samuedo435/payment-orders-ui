@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getAllOrders } from "../services/orderService";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Lista de órdenes.
@@ -43,6 +44,9 @@ function OrdersPage() {
 
     const filteredOrders =
         orders.filter(order => {
+
+            const navigate =
+                useNavigate();
 
             const matchesSearch =
 
@@ -187,6 +191,11 @@ function OrdersPage() {
 
                                     <button
                                         className="btn btn-sm btn-primary me-2"
+                                        onClick={() =>
+                                            navigate(
+                                                `/orders/${order.id}`
+                                            )
+                                        }
                                     >
                                         View
                                     </button>
