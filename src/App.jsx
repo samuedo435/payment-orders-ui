@@ -1,4 +1,5 @@
 import { AuthProvider } from "./context/AuthContext";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
 
@@ -6,13 +7,7 @@ function App() {
 
         <AuthProvider>
 
-            <div className="container mt-5">
-
-                <h1>
-                    Payment Orders System
-                </h1>
-
-            </div>
+            <AppRoutes />
 
         </AuthProvider>
     );
