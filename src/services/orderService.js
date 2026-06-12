@@ -1,6 +1,22 @@
 import axiosClient from "../api/axiosClient";
 
 /**
+ * Crea una orden.
+ */
+export async function createOrder(
+    order
+) {
+
+    const response =
+        await axiosClient.post(
+            "/orders",
+            order
+        );
+
+    return response.data;
+}
+
+/**
  * Obtiene todas las órdenes.
  */
 export async function getAllOrders() {
