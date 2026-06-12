@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
  */
 function OrdersPage() {
 
+    const navigate = useNavigate();
+    
     const { role } = useAuth();
 
     const [orders, setOrders] = useState([]);
@@ -45,8 +47,7 @@ function OrdersPage() {
     const filteredOrders =
         orders.filter(order => {
 
-            const navigate =
-                useNavigate();
+            
 
             const matchesSearch =
 
