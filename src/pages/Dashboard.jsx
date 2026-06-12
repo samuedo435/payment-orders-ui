@@ -1,4 +1,5 @@
 import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
 
 /**
  * Dashboard principal.

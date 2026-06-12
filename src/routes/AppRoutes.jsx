@@ -5,6 +5,9 @@ import {
 } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage";
+import DashboardPage from "../pages/DashboardPage";
+
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
 
@@ -22,6 +25,15 @@ function AppRoutes() {
                 <Route
                     path="/login"
                     element={<LoginPage />}
+                />
+
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <DashboardPage />
+                        </ProtectedRoute>
+                    }
                 />
 
             </Routes>
