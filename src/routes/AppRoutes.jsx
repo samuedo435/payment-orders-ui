@@ -6,6 +6,7 @@ import {
 
 import LoginPage from "../pages/LoginPage";
 import DashboardPage from "../pages/DashboardPage";
+import OrdersPage from "../pages/OrdersPage";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 
@@ -32,6 +33,15 @@ function AppRoutes() {
                     element={
                         <ProtectedRoute>
                             <DashboardPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/orders"
+                    element={
+                        <ProtectedRoute>
+                            <OrdersPage />
                         </ProtectedRoute>
                     }
                 />
