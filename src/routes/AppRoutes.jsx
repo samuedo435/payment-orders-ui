@@ -7,7 +7,7 @@ import {
 import LoginPage from "../pages/LoginPage";
 import DashboardPage from "../pages/DashboardPage";
 import OrdersPage from "../pages/OrdersPage";
-
+import OrderDetailPage from "../pages/OrderDetailPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
@@ -42,6 +42,15 @@ function AppRoutes() {
                     element={
                         <ProtectedRoute>
                             <OrdersPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/orders/:id"
+                    element={
+                        <ProtectedRoute>
+                            <OrderDetailPage />
                         </ProtectedRoute>
                     }
                 />
