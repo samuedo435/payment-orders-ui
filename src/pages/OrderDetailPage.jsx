@@ -14,6 +14,7 @@ from "../context/AuthContext";
 
 import {
     getOrderById,
+    getOrderHistory,
     approveOrder,
     rejectOrder,
     uploadInvoice,
@@ -35,6 +36,9 @@ function OrderDetailPage() {
     const [order, setOrder] =
         useState(null);
 
+    const [history, setHistory] =
+    useState([]);
+
     const [selectedFile,
         setSelectedFile] =
         useState(null);
@@ -52,6 +56,11 @@ function OrderDetailPage() {
                 await getOrderById(id);
 
             setOrder(data);
+
+            const historyData =
+                await getOrderHistory(id);
+
+            setHistory(historyData);
         };
 
     const handleApprove =
@@ -264,6 +273,86 @@ function OrderDetailPage() {
                         </div>
                     )
                 }
+
+                <hr />
+
+                    <h4>
+                        Status History
+                    </h4>
+                                
+                    {
+                        history.length === 0
+                            ? (
+                                <p>
+                                    No status changes registered.
+                                </p>
+                            )
+                            : (
+                                <table className="table">
+                                
+                                    <thead>
+                            
+                                        <tr>
+                            
+                                            <th>
+                                                Previous Status
+                                            </th>
+                            
+                                            <th>
+                                                New Status
+                                            </th>
+                            
+                                            <th>
+                                                Changed By
+                                            </th>
+                            
+                                            <th>
+                                                Date
+                                            </th>
+                            
+                                        </tr>
+                            
+                                    </thead>
+                            
+                                    <tbody>
+                            
+                                        {
+                                            history.map(
+                                                (item, index) => (
+                                                
+                                                    <tr key={index}>
+                                                    
+                                                        <td>
+                                                            {item.previousStatus}
+                                                        </td>
+                                                
+                                                        <td>
+                                                            {item.newStatus}
+                                                        </td>
+                                                
+                                                        <td>
+                                                            {item.changedBy}
+                                                        </td>
+                                                
+                                                        <td>
+                                                            {
+                                                                new Date(
+                                                                    item.changedAt
+                                                                ).toLocaleString()
+                                                            }
+                                                        </td>
+                                                        
+                                                    </tr>
+                    
+                                                )
+                                            )
+                                        }
+                    
+                                    </tbody>
+                                    
+                                </table>
+                            )
+                    }
 
             </div>
 
