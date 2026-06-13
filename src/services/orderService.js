@@ -125,3 +125,21 @@ export async function getOrderHistory(id) {
 
     return response.data;
 }
+
+/**
+ * Archiva las órdenes que tienen una fecha anterior a la especificada.
+ */
+export async function archiveOrders(
+    cutoffDate
+) {
+
+    const response =
+        await axiosClient.post(
+            "/orders/archive-orders",
+            {
+                cutoffDate
+            }
+        );
+
+    return response.data;
+}
