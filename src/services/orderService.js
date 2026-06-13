@@ -96,3 +96,19 @@ export async function uploadInvoice(
 
     return response.data;
 }
+
+/**
+ * Descarga la factura de una orden.
+ */
+export async function downloadInvoice(id) {
+
+    const response =
+        await axiosClient.get(
+            `/orders/${id}/invoice`,
+            {
+                responseType: "blob"
+            }
+        );
+
+    return response.data;
+}
