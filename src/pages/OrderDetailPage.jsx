@@ -16,7 +16,8 @@ import {
     getOrderById,
     approveOrder,
     rejectOrder,
-    uploadInvoice
+    uploadInvoice,
+    downloadInvoice
 }
 from "../services/orderService";
 
@@ -84,6 +85,46 @@ function OrderDetailPage() {
             loadOrder();
         };
 
+    const handleDownloadInvoice =
+        async () => {
+
+            try {
+
+                const blob =
+                    await downloadInvoice(id);
+
+                const url =
+                    window.URL.createObjectURL(blob);
+
+                const link =
+                    document.createElement("a");
+
+                link.href = url;
+
+                link.download =
+                    `invoice_${id}.pdf`;
+
+                document.body.appendChild(
+                    link
+                );
+
+                link.click();
+
+                link.remove();
+
+                window.URL.revokeObjectURL(
+                    url
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Error downloading invoice",
+                    error
+                );
+            }
+        };
+
     if (!order) {
 
         return (
@@ -148,6 +189,20 @@ function OrderDetailPage() {
                             : "Not uploaded"
                     }
                 </p>
+
+                {
+                    order.invoicePath &&
+                    (
+                        <button
+                            className="btn btn-secondary"
+                            onClick={
+                                handleDownloadInvoice
+                            }
+                        >
+                            Download Invoice
+                        </button>
+                    )
+                }
 
                 {
                     role === "ADMIN"
