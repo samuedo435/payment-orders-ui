@@ -17,12 +17,25 @@ export async function createOrder(
 }
 
 /**
- * Obtiene todas las órdenes.
+ * Obtiene las órdenes activas.
  */
 export async function getAllOrders() {
 
     const response =
         await axiosClient.get("/orders");
+
+    return response.data;
+}
+
+/**
+ * Obtiene las órdenes archivadas.
+ */
+export async function getArchivedOrders() {
+
+    const response =
+        await axiosClient.get(
+            "/orders/archived"
+        );
 
     return response.data;
 }
