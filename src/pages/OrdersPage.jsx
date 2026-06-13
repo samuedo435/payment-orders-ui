@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { getAllOrders } from "../services/orderService";
+import { getAllOrders, getArchivedOrders } from "../services/orderService";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,8 @@ function OrdersPage() {
 
     const [orders, setOrders] = useState([]);
 
+    const [showArchived, setShowArchived] = useState(false);
+
     const [search, setSearch] = useState("");
 
     const [statusFilter, setStatusFilter] =
@@ -24,14 +26,16 @@ function OrdersPage() {
 
         loadOrders();
 
-    }, []);
+    }, [showArchived]);
 
     const loadOrders = async () => {
 
         try {
 
             const data =
-                await getAllOrders();
+                showArchived
+                    ? await getArchivedOrders()
+                    : await getAllOrders();
 
             setOrders(data);
 
@@ -78,10 +82,49 @@ function OrdersPage() {
             <div className="container mt-4">
 
                 <h2>
-                    Payment Orders
+                    {
+                        showArchived
+                            ? "Archived Orders"
+                            : "Payment Orders"
+                    }
                 </h2>
 
                 <hr />
+
+                {
+                    role === "ADMIN" &&
+                    (
+                        <div className="mb-3">
+                        
+                            <button
+                                className={
+                                    showArchived
+                                        ? "btn btn-outline-primary me-2"
+                                        : "btn btn-primary me-2"
+                                }
+                                onClick={() =>
+                                    setShowArchived(false)
+                                }
+                            >
+                                Active Orders
+                            </button>
+                            
+                            <button
+                                className={
+                                    showArchived
+                                        ? "btn btn-primary"
+                                        : "btn btn-outline-primary"
+                                }
+                                onClick={() =>
+                                    setShowArchived(true)
+                                }
+                            >
+                                Archived Orders
+                            </button>
+                            
+                        </div>
+                    )
+                }
 
                 <div className="row mb-3">
 
@@ -200,6 +243,17 @@ function OrdersPage() {
                                     >
                                         View
                                     </button>
+
+                                    {
+                                        showArchived &&
+                                        (
+                                            <span
+                                                className="badge bg-secondary ms-2"
+                                            >
+                                                Archived
+                                            </span>
+                                        )
+                                    }
 
                                     {
                                         role ===
