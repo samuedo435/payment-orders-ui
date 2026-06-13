@@ -112,3 +112,16 @@ export async function downloadInvoice(id) {
 
     return response.data;
 }
+
+/**
+ * Obtiene el historial de cambios de una orden.
+ */
+export async function getOrderHistory(id) {
+
+    const response =
+        await axiosClient.get(
+            `/orders/${id}/history`
+        );
+
+    return response.data;
+}
