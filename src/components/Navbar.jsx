@@ -69,6 +69,18 @@ function Navbar() {
                         )
                     }
 
+                    {
+                        role === "ADMIN" &&
+                        (
+                            <Link
+                                to="/admin"
+                                className="nav-link"
+                            >
+                                Administration
+                            </Link>
+                        )
+                    }
+
                 </div>
 
                 <button
