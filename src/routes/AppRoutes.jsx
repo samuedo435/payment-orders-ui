@@ -10,6 +10,7 @@ import OrdersPage from "../pages/OrdersPage";
 import OrderDetailPage from "../pages/OrderDetailPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CreateOrderPage from "../pages/CreateOrderPage";
+import AdminPage from "../pages/AdminPage";
 
 function AppRoutes() {
 
